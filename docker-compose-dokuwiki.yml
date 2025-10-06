@@ -1,0 +1,27 @@
+services:
+  dokuwiki:
+    image: dokuwiki/dokuwiki:latest
+    container_name: dokuwiki
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    environment:
+      - DOKUWIKI_USERNAME=${DOKUWIKI_USERNAME}
+      - DOKUWIKI_FULL_NAME=${DOKUWIKI_FULL_NAME}
+      - DOKUWIKI_EMAIL=${DOKUWIKI_EMAIL}
+      - DOKUWIKI_PASSWORD=${DOKUWIKI_PASSWORD}
+      - DOKUWIKI_WIKI_NAME=${DOKUWIKI_WIKI_NAME}
+    volumes:
+      - dokuwiki_data:/bitnami/dokuwiki
+      - dokuwiki_storage:/bitnami/dokuwiki-storage
+    networks:
+      - dokuwiki_network
+volumes:
+  dokuwiki_data:
+    driver: local
+  dokuwiki_storage:
+    driver: local
+
+networks:
+  dokuwiki_network:
+    driver: bridge

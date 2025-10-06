@@ -1,0 +1,16 @@
+services:
+  proxy:
+    image: haproxy:3.0
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped\
+    user: haproxy #sempre vai executar com o usuario haproxy isso da mais seguranca e garante o haproxy executara apenas com o usuario haproxy.
+    networks:
+      - dokuwiki_network
+    volumes:
+      - /etc/haproxy:/usr/local/etc/haproxy
+      
+networks:
+  dokuwiki_network:
+    driver: bridge
